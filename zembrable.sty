@@ -1,0 +1,126 @@
+\ProvidesPackage{zebramble}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{polynom} % Used for long division
+\usepackage{esint} % Contour integrals
+
+% Structural and reference packages
+\usepackage{hyperref}
+\usepackage[shortlabels]{enumitem}
+
+% Must be last imported package
+\usepackage{cleveref}
+
+% Section formatting
+\renewcommand*{\thesubsection}{\thesection.\alph{subsection}}
+\renewcommand*{\thesubsubsection}{\thesubsection.\roman{subsubsection}}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% Operators (no parentheses)
+\newcommand*{\re}{\operatorname{Re}}
+\newcommand*{\im}{\operatorname{Im}}
+\newcommand*{\cint}{\ointctrclockwise}
+\newcommand*{\cwint}{\ointclockwise}
+\newcommand*{\Res}[2]{\underset{{#1}}{\mathrm{Res}}\paren*{#2}} % we should make this like sum_{stuff} later
+
+% Operators with args enclosed in parentheses
+\newcommand*{\Stab}[2]{\operatorname{Stab}_{#1}\paren*{#2}}
+\newcommand*{\Id}[1]{\operatorname{id}_{#1}}
+\newcommand*{\Img}[1]{\operatorname{im}\paren*{#1}}
+\newcommand*{\Char}[1]{\operatorname{char}\paren*{#1}}
+\newcommand*{\Max}[1]{\operatorname{max}\set*{#1}}
+\newcommand*{\Min}[1]{\operatorname{min}\set*{#1}}
+\newcommand*{\Ker}[1]{\operatorname{ker}\paren*{#1}}
+\newcommand*{\Isom}{\overset{\sim}{=}}
+\newcommand*{\Deg}[1]{\operatorname{deg}\paren*{#1}}
+\renewcommand*{\Re}[1]{\operatorname{Re}\paren*{#1}}
+\renewcommand*{\Im}[1]{\operatorname{Im}\paren*{#1}}
+\newcommand*{\Cos}[1]{\operatorname{cos}\paren*{#1}}
+\newcommand*{\Sin}[1]{\operatorname{sin}\paren*{#1}}
+\newcommand*{\Tan}[1]{\operatorname{tan}\paren*{#1}}
+\newcommand*{\Cosh}[1]{\operatorname{cosh}\paren*{#1}}
+\newcommand*{\Sinh}[1]{\operatorname{sinh}\paren*{#1}}
+\newcommand*{\Tanh}[1]{\operatorname{tanh}\paren*{#1}}
+\newcommand*{\Exp}[1]{\exp\paren*{#1}}
+
+% Set labels (complex nums, reals, etc.)
+\newcommand*{\bbC}{\mathbb{C}}
+\newcommand*{\bbR}{\mathbb{R}}
+\newcommand*{\bbQ}{\mathbb{Q}}
+\newcommand*{\bbZ}{\mathbb{Z}}
+\newcommand*{\bbN}{\mathbb{N}}
+\newcommand*{\bbF}{\mathbb{F}}
+\newcommand*{\bbJ}{\mathbb{J}}
+\newcommand*{\bbH}{\mathbb{H}}
+\newcommand*{\Zmod}[1]{\bbZ/{#1}\bbZ}
+
+% Contractions and symbol shortcuts
+\newcommand*{\vf}{\varphi}
+\newcommand*{\inv}{^{-1}}
+\newcommand*{\surj}{\twoheadrightarrow}
+\newcommand*{\st}{\; s.t. \;}
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}
+
+% Containers (brackets that automatically match the size of their contents)
+% \abs*{\frac{a}{b}} will scale the vertical bars to match the size of the fraction
+\DeclarePairedDelimiter{\paren}{(}{)}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclarePairedDelimiter{\sqbrack}{[}{]}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\newcommand*{\conj}[1]{\overline{#1}}
+% residue alias for overline
+\newcommand*{\res}[1]{\overline{#1}}
+
+% Definitions, theorems and lemmas
+\numberwithin{equation}{section}
+
+\newtheoremstyle{thmjz}% name of the style to be used
+    {}% measure of space to leave above the theorem. E.g.: 3pt
+    {}% measure of space to leave below the theorem. E.g.: 3pt
+    {}% name of font to use in the body of the theorem
+    {0pt}% measure of space to indent
+    {\bfseries}% name of head font
+    {\\}% punctuation between head and body
+    { }% space after theorem head; " " = normal interword space
+    {\thmname{#1}\thmnumber{ #2}%
+    \thmnote{: #3\addcontentsline{toc}{subsubsection}{{\textit{#1}}: #3}}. }
+
+\theoremstyle{thmjz}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{formula}[thm]{Formula}
+
+\newtheorem{defn}[thm]{Definition}
+% \newtheorem{conj}{Conjecture}[section] % removed due to conflict with conjugate command
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{aside}{Aside}
+\newtheorem*{note}{Note}
+
+\newenvironment{explanation}[2]
+  {\begin{proof}[{#1}{#2}]}
+  {\end{proof}}
+
+% Proof (with reference) environment
+\newenvironment{pf}[1]
+  {\begin{explanation}{Proof of }{#1}}
+  {\end{explanation}}
+
+% Intuition (with reference) environment
+\newenvironment{intuition}[1]
+  {\begin{explanation}{Intuition for }{#1}}
+  {\end{explanation}}
