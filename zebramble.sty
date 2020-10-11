@@ -1,3 +1,6 @@
+% After making changes, reload on your computer with (bash)
+% sudo texhash && sudo mktexlsr
+
 \ProvidesPackage{zebramble}
 
 \usepackage{graphicx}
@@ -7,6 +10,7 @@
 \usepackage{mathtools}
 \usepackage{polynom} % Used for long division
 \usepackage{esint} % Contour integrals
+\usepackage{tikz-cd} % Commutative diagrams
 
 % Structural and reference packages
 \usepackage{hyperref}
@@ -27,6 +31,7 @@
 \newcommand*{\cint}{\ointctrclockwise}
 \newcommand*{\cwint}{\ointclockwise}
 \newcommand*{\Res}[2]{\underset{{#1}}{\mathrm{Res}}\paren*{#2}} % we should make this like sum_{stuff} later
+\newcommand*{\cts}{\operatorname{Cts}}
 
 % Operators with args enclosed in parentheses
 \newcommand*{\Stab}[2]{\operatorname{Stab}_{#1}\paren*{#2}}
@@ -56,6 +61,7 @@
 \newcommand*{\N}{\mathbb{N}}
 \newcommand*{\F}{\mathbb{F}}
 \newcommand*{\J}{\mathbb{J}}
+\renewcommand*{\P}{\mathbb{P}} % Use for probability - wtf is original \P symbol?
 \newcommand*{\bbH}{\mathbb{H}}
 \newcommand*{\Zmod}[1]{\bbZ/{#1}\bbZ}
 
@@ -66,6 +72,10 @@
 \newcommand*{\st}{\; s.t. \;}
 \newcommand*{\dif}{\mathop{}\!\mathrm{d}}
 
+% Wrappers
+\newcommand*{\conj}[1]{\overline{#1}}
+\newcommand*{\res}[1]{\overline{#1}} % residue alias for overline
+
 % Containers (brackets that automatically match the size of their contents)
 % \abs*{\frac{a}{b}} will scale the vertical bars to match the size of the fraction
 \DeclarePairedDelimiter{\paren}{(}{)}
@@ -74,10 +84,8 @@
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\newcommand{\size}[1]{\abs*{#1}}
 \DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
-\newcommand*{\conj}[1]{\overline{#1}}
-% residue alias for overline
-\newcommand*{\res}[1]{\overline{#1}}
 
 % Definitions, theorems and lemmas
 \numberwithin{equation}{section}
